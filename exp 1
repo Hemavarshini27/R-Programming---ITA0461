@@ -1,0 +1,5 @@
+name=readline(prompt = "Name : ")
+Hemabhi
+age=readline(prompt = "Age : ")
+19
+R.version.string
