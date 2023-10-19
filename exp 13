@@ -1,0 +1,7 @@
+n<-5
+mean<-0
+sigma<-1
+r<-rnorm(n,mean = mean,sd = sigma)
+c<-table(round(r,2))
+print(r)
+print(c)
