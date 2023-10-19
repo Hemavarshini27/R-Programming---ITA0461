@@ -1,0 +1,8 @@
+v1<-c(1:9)
+v2<-c(9:1)
+m<-array(c(v1,v2),dim = c(3,3,2))
+print(m)
+second_m<-m[2, ,2]
+print(second_m)
+first_m<-m[3,3,1]
+print(first_m)
