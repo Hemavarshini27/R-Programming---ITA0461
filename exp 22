@@ -1,0 +1,5 @@
+arr1<-array(c(1:9),dim = c(3,3))
+arr2<-array(c(10:18),dim = c(3,3))
+arr3<-array(c(19:27),dim = c(3,3))
+comb<-rbind(arr1[1, ,drop = FALSE],arr2[1, ,drop = FALSE],arr3[1, ,drop = FALSE])
+print(comb)
