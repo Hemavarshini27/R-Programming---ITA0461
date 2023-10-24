@@ -1,0 +1,28 @@
+data("USArrests")
+num_features <- ncol(USArrests)
+num_records <- nrow(USArrests)
+str(USArrests)
+summary(USArrests)
+state_with_max_rape <- USArrests[which.max(USArrests$Rape), "State"]
+cat("(i) b. State with the largest total number of rape:", state_with_max_rape, "\n")
+state_with_max_murder <- USArrests[which.max(USArrests$Murder), "State"]
+state_with_min_murder <- USArrests[which.min(USArrests$Murder), "State"]
+cat("(i) c. State with the max crime rate for murder:", state_with_max_murder, "\n")
+cat("    State with the min crime rate for murder:", state_with_min_murder, "\n")
+correlation_matrix <- cor(USArrests)
+cat("\n(ii) a. Correlation Matrix:\n")
+print(correlation_matrix)
+median_assault <- median(USArrests$Assault)
+states_above_median_assault <- USArrests$State[USArrests$Assault > median_assault]
+cat("\n(ii) b. States with assault arrests more than the median of the country:\n")
+print(states_above_median_assault)
+bottom_25_percent_states <- USArrests$State[USArrests$Murder < quantile(USArrests$Murder, 0.25)]
+cat("\n(ii) c. States in the bottom 25% of murder:\n")
+print(bottom_25_percent_states)
+hist(USArrests$Murder, main = "Histogram of Murder Arrests by US State", xlab = "Murder Arrests")
+lines(density(USArrests$Murder), col = "blue")
+plot(USArrests$UrbanPop, USArrests$Murder, col = scales::rescale(USArrests$Assault), 
+     pch = 19, main = "Murder Arrest Rate vs. Urbanization",
+     xlab = "Urban Population (%)", ylab = "Murder Arrest Rate")
+legend("topright", legend = "Assault", fill = scales::gradient_n(100, low = "blue", high = "red"))
+barplot(USArrests$Murder, names.arg = USArrests$State, las = 2, main = "Murder Rate by US State")
