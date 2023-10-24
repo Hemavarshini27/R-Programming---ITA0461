@@ -1,0 +1,12 @@
+box_plot <- ggplot(ChickWeight, aes(x = factor(Diet), y = weight)) +
+  geom_boxplot() +
+  labs(title = "Box Plot of Weight by Diet", x = "Diet", y = "Weight")
+subset_data <- subset(ChickWeight, Diet == 1)
+histogram_plot <- ggplot(subset_data, aes(x = weight)) +
+  geom_histogram(binwidth = 10, fill = "blue", color = "black") +
+  labs(title = "Histogram of Weight for Diet-1", x = "Weight")
+scatter_plot <- ggplot(ChickWeight, aes(x = Time, y = weight, color = factor(Diet))) +
+  geom_point() +
+  labs(title = "Scatter Plot of Weight vs. Time by Diet", x = "Time", y = "Weight") +
+  scale_color_discrete(name = "Diet")
+grid.arrange(box_plot, histogram_plot, scatter_plot, ncol = 2)
