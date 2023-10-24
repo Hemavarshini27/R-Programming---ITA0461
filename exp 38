@@ -1,0 +1,9 @@
+data("Titanic")
+barplot_data <- table(Titanic$Survived, Titanic$Class)
+barplot(barplot_data, beside = TRUE, col = c("lightblue", "lightgreen"),
+        legend = rownames(barplot_data), main = "Survived on the Titanic by Passenger Class")
+barplot_data_gender <- table(Titanic$Survived, Titanic$Class, Titanic$Sex)
+barplot(barplot_data_gender, beside = TRUE, col = c("lightblue", "lightgreen"),
+        legend = dimnames(barplot_data_gender)[[3]], main = "Survived on the Titanic by Passenger Class and Gender")
+hist(Titanic$Age, breaks = 20, col = "lightblue",
+     xlab = "Age", ylab = "Frequency", main = "Age Distribution on the Titanic")
