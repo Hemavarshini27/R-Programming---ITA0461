@@ -1,0 +1,11 @@
+data(iris)
+set.seed(123)  # Set seed for reproducibility
+sample_indices <- sample(1:nrow(iris), size = 0.8 * nrow(iris))
+train_data <- iris[sample_indices, ]
+test_data <- iris[-sample_indices, ]
+library(nnet)
+model <- multinom(Species ~ Petal.Width + Petal.Length, data = train_data)
+predicted_probabilities <- predict(model, test_data, type = "probs")
+library(caret)
+confusion_matrix <- confusionMatrix(predicted_probabilities, test_data$Species)
+print(confusion_matrix)
