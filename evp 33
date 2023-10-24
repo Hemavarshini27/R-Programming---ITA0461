@@ -1,0 +1,17 @@
+# Load the reshape2 package if not already loaded
+if (!require(reshape2)) {
+  install.packages("reshape2")
+  library(reshape2)
+}
+# (i) Get the summary statistics of the air quality dataset
+summary(airquality)
+# (ii) Melt airquality dataset and display as long-format data
+melted_data <- melt(airquality)
+# (iii) Melt airquality data and specify month and day to be "ID variables"
+melted_data_with_id <- melt(airquality, id.vars = c("Month", "Day"))
+# (iv) Cast the molten airquality data set with respect to month and date features
+casted_data <- dcast(melted_data_with_id, Month + Day ~ variable)
+# (v) Compute the average of Ozone, Solar.R, Wind, and Temperature per month
+averages_per_month <- dcast(melted_data, Month ~ variable, fun.aggregate = mean)
+# Print the results
+print(averages_per_month)
