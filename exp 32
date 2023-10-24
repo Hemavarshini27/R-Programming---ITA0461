@@ -1,0 +1,23 @@
+#solar radiation
+# Load the built-in 'airquality' dataset
+data(airquality)
+# i. Compute the mean temperature (without using built-in function)
+mean_temp <- sum(airquality$Temp) / length(airquality$Temp)
+print(paste("Mean Temperature:", mean_temp))
+cat("\n")
+# ii. Extract the first five rows from airquality
+first_five_rows <- airquality[1:5, ]
+print("First Five Rows:")
+print(first_five_rows)
+cat("\n")
+# iii. Extract all columns from airquality except Temp and Wind
+columns_to_extract <- setdiff(names(airquality), c("Temp", "Wind"))
+extracted_data <- airquality[, columns_to_extract]
+print("Extracted Data with Columns Except Temp and Wind:")
+print(extracted_data)
+cat("\n")
+# iv. Find the coldest day during the period
+coldest_day_index <- which.min(airquality$Temp)
+coldest_day <- airquality[coldest_day_index, ]
+print("Coldest Day During the Period:")
+print(coldest_day)
