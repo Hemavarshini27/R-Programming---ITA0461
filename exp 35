@@ -1,0 +1,28 @@
+if (!require(dplyr)) {
+  install.packages("dplyr")
+  library(dplyr)
+}
+if (!require(reshape2)) {
+  install.packages("reshape2")
+  library(reshape2)
+}
+data(ChickWeight)
+ordered_data <- ChickWeight %>%
+  arrange(diet, weight) %>%
+  group_by(diet) %>%
+  slice_tail(n = 6)
+melted_data <- melt(ChickWeight, id.vars = c("Chick", "Time", "Diet"))
+mean_weight_by_diet <- dcast(melted_data, Diet ~ variable, fun.aggregate = mean)
+mode_weight_by_diet <- dcast(melted_data, Diet ~ variable, fun.aggregate = function(x) {
+  tbl <- table(x)
+  tbl_max <- max(tbl)
+  as.numeric(names(tbl[tbl == tbl_max]))
+})
+cat("(i) Last 6 records after ordering by weight and grouping by diet:\n")
+print(ordered_data)
+cat("\n(ii) a. Melted data:\n")
+print(melted_data)
+cat("\n(ii) b. Mean value of 'weight' grouped by 'Diet':\n")
+print(mean_weight_by_diet)
+cat("\n(ii) c. Approximate mode of 'weight' grouped by 'Diet':\n")
+print(mode_weight_by_diet)
